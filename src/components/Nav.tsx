@@ -7,7 +7,7 @@ export const Nav = () => {
     <nav className="navbar bg-base-100 pt-5">
       <div className="flex-1">
         <Link href="/" className="text-xl font-semibold">
-          mojblog
+          suzuya.dev
         </Link>
       </div>
       <div className="flex-none gap-2">

@@ -8,8 +8,8 @@ import "./globals.css";
 const poppin = Lato({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata: Metadata = {
-  title: "rei-x blog",
-  description: "What you gonna do?",
+  title: "hi",
+  description: "web developer, software engineer, and student",
 };
 
 export default function RootLayout({
