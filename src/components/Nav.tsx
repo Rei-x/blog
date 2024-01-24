@@ -11,7 +11,7 @@ export const Nav = () => {
         </Link>
       </div>
       <div className="flex-none gap-2">
-        <Link href="/">About</Link>
+        <Link href="/about">About</Link>
       </div>
     </nav>
   );

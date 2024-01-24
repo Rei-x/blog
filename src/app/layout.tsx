@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
-import "./globals.css";
+
 import { Nav } from "@/components/Nav";
+
+import "./globals.css";
 
 const poppin = Lato({ subsets: ["latin"], weight: ["400", "700"] });
 

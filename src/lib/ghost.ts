@@ -1,5 +1,7 @@
 import GhostContentAPI from "@tryghost/content-api";
+
 import { env } from "@/env.mjs";
+
 export const api = new GhostContentAPI({
   url: env.API_URL,
   key: env.CONTENT_API_KEY,
@@ -9,7 +11,7 @@ export const api = new GhostContentAPI({
     const apiUrl = new URL(url);
     // @ts-ignore
     Object.keys(params).map((key) =>
-      apiUrl.searchParams.set(key, encodeURIComponent(params[key]))
+      apiUrl.searchParams.set(key, encodeURIComponent(params[key])),
     );
 
     return fetch(apiUrl.toString(), { method, headers })
