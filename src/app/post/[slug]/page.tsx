@@ -39,7 +39,7 @@ const Post = async ({ params }: { params: { slug: string } }) => {
   );
 
   return (
-    <div>
+    <div className="mt-10">
       <div className="flex flex-col justify-center text-center">
         <div className="relative h-[600px]">
           <Image
@@ -58,13 +58,13 @@ const Post = async ({ params }: { params: { slug: string } }) => {
           }}
         />
       </div>
-      <article className="prose lg:prose-xl mx-auto mt-12">
-        <h1>{post.title}</h1>
+      <article className="prose lg:prose-xl mx-auto mt-12 prose-headings:font-sans font-serif prose-headings:font-semibold prose-figcaption:font-sans">
+        <h1 className="prose">{post.title}</h1>
         <div
           dangerouslySetInnerHTML={{
             __html: post.html ?? "",
           }}
-          className="[&>a]:text-black [&>a]:hover:text-blue-500 [&>a]:visited:text-purple-500 [&>.kg-image-card]:max-w-full [&>.kg-image-card]:mx-auto [&>.kg-image]:my-5 [&>.kg-image]:shadow-md [&>.kg-image]:rounded-md [&>.kg-image]:overflow-hidden [&>.kg-image]:object-cover [&>.kg-image]:object-center"
+          // make p serif
         />
       </article>
     </div>
