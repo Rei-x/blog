@@ -11,6 +11,10 @@ const nextConfig = {
         hostname: "static.ghost.org",
         protocol: "https",
       },
+      {
+        hostname: "ghost.coolify.reix.tech",
+        protocol: "https",
+      },
     ],
   },
   transpilePackages: ["react-daisyui"],
