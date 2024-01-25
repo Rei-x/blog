@@ -6,3 +6,9 @@
   height: auto;
   margin-bottom: 1.5rem;
 }
+
+.kg-image-card figcaption {
+  font-size: 0.8rem;
+  color: #777;
+  text-align: center;
+}
