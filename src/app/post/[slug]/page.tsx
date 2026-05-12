@@ -1,74 +1,59 @@
 import Image from "next/image";
-import React from "react";
+import { notFound } from "next/navigation";
 
-import { api } from "@/lib/ghost";
+import { getAllSlugs, getPostBySlug } from "@/lib/posts";
 
-import "./post.css";
+type Params = { slug: string };
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const post = await api.posts.read(
-    { slug: params.slug },
-    { formats: ["html"] },
-  );
-
-  return {
-    title: post.meta_title ?? post.og_title ?? post.title,
-    description:
-      post.meta_description ?? post.og_description ?? post.excerpt ?? "",
-  };
+export async function generateMetadata(props: { params: Promise<Params> }) {
+  const { slug } = await props.params;
+  try {
+    const post = await getPostBySlug(slug);
+    return {
+      title: post.title,
+      description: post.excerpt,
+    };
+  } catch {
+    return {};
+  }
 }
 
 export async function generateStaticParams() {
-  const posts = await api.posts.browse({
-    limit: "all",
-  });
-
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  const slugs = await getAllSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
-const Post = async ({ params }: { params: { slug: string } }) => {
-  const post = await api.posts.read(
-    { slug: params.slug },
-    { formats: ["html"] },
-  );
+export default async function Post(props: { params: Promise<Params> }) {
+  const { slug } = await props.params;
+
+  let post;
+  try {
+    post = await getPostBySlug(slug);
+  } catch {
+    notFound();
+  }
 
   return (
     <div className="mt-10">
-      <div className="flex flex-col justify-center text-center">
-        <div className="relative h-[600px]">
-          <Image
-            src={post.feature_image ?? ""}
-            alt={post.feature_image_alt ?? ""}
-            fill={true}
-            style={{
-              objectFit: "contain",
-            }}
-          />
+      {post.coverImage ? (
+        <div className="flex flex-col justify-center text-center">
+          <div className="relative h-[600px]">
+            <Image
+              src={post.coverImage}
+              alt={post.coverImageAlt ?? ""}
+              fill={true}
+              style={{ objectFit: "contain" }}
+            />
+          </div>
+          {post.coverImageAlt ? (
+            <p className="mt-5 text-gray-500">{post.coverImageAlt}</p>
+          ) : null}
         </div>
-        <p
-          className="mt-5 text-gray-500"
-          dangerouslySetInnerHTML={{
-            __html: post.feature_image_caption ?? "",
-          }}
-        />
-      </div>
+      ) : null}
       <article className="prose lg:prose-xl mx-auto mt-12 prose-headings:font-sans font-serif prose-headings:font-semibold prose-figcaption:font-sans">
         <h1 className="prose">{post.title}</h1>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: post.html ?? "",
-          }}
-          // make p serif
-        />
+        <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
       </article>
     </div>
   );
-};
-
-export default Post;
+}
