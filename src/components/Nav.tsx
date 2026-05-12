@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export const Nav = () => {
   return (
-    <nav className="navbar bg-base-100 pt-5">
+    <nav className="navbar bg-base-100 mx-auto max-w-screen-md pt-5">
       <div className="flex-1">
         <Link href="/" className="text-xl font-semibold">
           suzuya.dev

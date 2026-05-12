@@ -36,22 +36,26 @@ export default async function Post(props: { params: Promise<Params> }) {
   return (
     <div className="mt-10">
       {post.coverImage ? (
-        <div className="flex flex-col justify-center text-center">
-          <div className="relative h-[600px]">
+        <figure className="mx-auto max-w-screen-md text-center">
+          <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
             <Image
               src={post.coverImage}
               alt={post.coverImageAlt ?? ""}
               fill={true}
-              style={{ objectFit: "contain" }}
+              priority
+              sizes="(min-width: 768px) 768px, 100vw"
+              style={{ objectFit: "cover" }}
             />
           </div>
           {post.coverImageAlt ? (
-            <p className="mt-5 text-gray-500">{post.coverImageAlt}</p>
+            <figcaption className="mt-3 text-sm text-gray-500">
+              {post.coverImageAlt}
+            </figcaption>
           ) : null}
-        </div>
+        </figure>
       ) : null}
-      <article className="prose lg:prose-xl mx-auto mt-12 prose-headings:font-sans font-serif prose-headings:font-semibold prose-figcaption:font-sans">
-        <h1 className="prose">{post.title}</h1>
+      <article className="prose md:prose-lg mx-auto mt-12 font-serif prose-headings:font-sans prose-headings:font-semibold prose-figcaption:font-sans">
+        <h1>{post.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
       </article>
     </div>

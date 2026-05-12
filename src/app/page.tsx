@@ -40,7 +40,7 @@ export default async function Home() {
                 <div className="card-body">
                   <time>{new Date(post.date).toLocaleDateString()}</time>
                   <h2 className="card-title">{post.title}</h2>
-                  <p className="line-clamp-2 flex-grow-0 text-base-content">
+                  <p className="line-clamp-2 flex-grow-0 text-base text-base-content">
                     {post.excerpt}
                   </p>
                 </div>
