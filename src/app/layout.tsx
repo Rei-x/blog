@@ -30,7 +30,11 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="cupcake">
+    <html
+      lang="en"
+      data-theme="cupcake"
+      className="[scrollbar-gutter:stable]"
+    >
       <body
         className={`${sans.variable} ${serif.variable} ${sans.className} container mx-auto`}
       >
